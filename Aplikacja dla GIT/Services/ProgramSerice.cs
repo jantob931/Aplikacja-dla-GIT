@@ -1,13 +1,12 @@
 ﻿using Aplikacja_dla_GIT.Models;
 
-
 namespace Aplikacja_dla_GIT.Services
 {
-    public class ProgramSerice 
+    public class ProgramSerice : IProgramService
     {
         public void AddStudents(Student student, StudentService studentService, List<Student> students)
         {
-            int licznik =0;
+            int licznik = 0;
             while (true)
             {
                 Console.Clear();
@@ -40,7 +39,6 @@ namespace Aplikacja_dla_GIT.Services
                 }
             }
         }
-
         public void AddGrades(List<Student> students, StudentService studentService)
         {
             if (CheckIsNull(students) == true)
@@ -57,6 +55,7 @@ namespace Aplikacja_dla_GIT.Services
                 {
                     if (students[item].Name == name && students[item].Surname == surname)
                     {
+                        Console.Clear();
                         Console.WriteLine("Po skoczeniu dodawnia ocen wcisnij q, podaj oceny: ");
                         while (true)
                         {
@@ -80,10 +79,8 @@ namespace Aplikacja_dla_GIT.Services
                 }
             }
         }
-
         public void EditName(List<Student> students, StudentService studentService)
         {
-
             if (CheckIsNull(students) == true)
             {
                 Console.WriteLine("Wcisnij dowolny przycisk aby wrocic do menu ");
@@ -101,7 +98,7 @@ namespace Aplikacja_dla_GIT.Services
                         Console.WriteLine("Podaj nowe imie: ");
                         string name2 = Console.ReadLine();
                         int licznik = 0;
-                        if (IsDigiOrEmpty(licznik, name2)==false)
+                        if (IsDigiOrEmpty(licznik, name2) == false)
                         {
                             item.Name = name2;
                             Console.WriteLine($"Imie zosatlo zmienione na: {name2}");
@@ -113,7 +110,6 @@ namespace Aplikacja_dla_GIT.Services
                 }
             }
         }
-
         public void EditSurname(List<Student> students, StudentService studentService)
         {
             if (CheckIsNull(students) == true)
@@ -133,14 +129,13 @@ namespace Aplikacja_dla_GIT.Services
                         Console.WriteLine("Podaj nowe nazwisko: ");
                         string surname2 = Console.ReadLine();
                         int licznik = 0;
-                        if (IsDigiOrEmpty(licznik,surname2) == false)
+                        if (IsDigiOrEmpty(licznik, surname2) == false)
                         {
-                           item.Surname = surname2;
-                           Console.WriteLine($"Nazwisko zosatlo zmienione na: {surname2}");
-                           Console.ReadKey();
+                            item.Surname = surname2;
+                            Console.WriteLine($"Nazwisko zosatlo zmienione na: {surname2}");
+                            Console.ReadKey();
                             break;
                         }
-                       
                         break;
                     }
                 }
@@ -164,7 +159,7 @@ namespace Aplikacja_dla_GIT.Services
                 }
                 Console.WriteLine("Wcisnij dowolny klawisz aby wrocic do menu: ");
                 Console.ReadKey();
-                 break;
+                break;
             }
         }
         public void ShowStudnetsStatistic(List<Student> students, StudentService studentService)
@@ -184,14 +179,14 @@ namespace Aplikacja_dla_GIT.Services
                 {
                     if (item.Name == name && item.Surname == surname)
                     {
-                        if (item.grades.Count != 0 )
+                        if (item.grades.Count != 0)
                         {
                             Console.Clear();
                             studentService.ShowStatistic();
                             Console.ReadKey();
                             break;
                         }
-                        if(item.grades.Count == 0)
+                        if (item.grades.Count == 0)
                         {
                             Console.WriteLine("Uczen nie posiada ocen!");
                             Console.ReadKey();
@@ -271,7 +266,6 @@ namespace Aplikacja_dla_GIT.Services
                         return true;
                     }
                 }
-               
             }
             return false;
         }

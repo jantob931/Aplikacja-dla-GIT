@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public List<double> grades = new List<double>();
+        public List<double> Grades = new List<double>();
     }
 }
