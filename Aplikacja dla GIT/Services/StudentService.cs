@@ -142,9 +142,9 @@ namespace Aplikacja_dla_GIT.Services
         }
 
 
-        public StatisticBase ShowStatistic()
+        public StatisticSerice ShowStatistic()
         {
-            var result = new StatisticBase();
+            var result = new StatisticSerice();
             result.highest_grade = 0;
             result.lowest_grade = allArades[0];
             result.average_grade = 0;
@@ -163,8 +163,5 @@ namespace Aplikacja_dla_GIT.Services
 
             return result;
         }
-
-
-
     }
 }
