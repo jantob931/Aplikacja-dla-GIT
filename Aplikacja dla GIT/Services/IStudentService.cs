@@ -1,5 +1,4 @@
 ﻿using Aplikacja_dla_GIT.Models;
-
 namespace Aplikacja_dla_GIT.Services
 {
     public interface IStudentService

@@ -109,10 +109,8 @@ namespace Aplikacja_dla_GIT.Services
                         Console.WriteLine("Invalid value");
                         break;
                     }
-
             }
         }
-
         public bool ValidateStudent(List<Student> students, string name, string surname)
         {
             bool studentValidate = true;
@@ -164,11 +162,9 @@ namespace Aplikacja_dla_GIT.Services
 
             }
             return result;
-        }
-            
+        }  
         public delegate void WriteMessageDelegate(object sender, EventArgs args);
         public event WriteMessageDelegate Average3Message;
-
         public void AverageUnder3(object sednder, EventArgs args)
         {
             Console.WriteLine("Oh no! We should inform student’s parents about this fact");

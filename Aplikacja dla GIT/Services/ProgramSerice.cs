@@ -268,9 +268,6 @@ namespace Aplikacja_dla_GIT.Services
                 }
             }
             return false;
-        }
-        
-        
-       
+        }     
     }
 }
