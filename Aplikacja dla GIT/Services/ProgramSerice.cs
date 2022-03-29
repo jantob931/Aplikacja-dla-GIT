@@ -179,14 +179,14 @@ namespace Aplikacja_dla_GIT.Services
                 {
                     if (item.Name == name && item.Surname == surname)
                     {
-                        if (item.grades.Count != 0)
+                        if (item.Grades.Count != 0)
                         {
                             Console.Clear();
                             studentService.ShowStatistic();
                             Console.ReadKey();
                             break;
                         }
-                        if (item.grades.Count == 0)
+                        if (item.Grades.Count == 0)
                         {
                             Console.WriteLine("Uczen nie posiada ocen!");
                             Console.ReadKey();
@@ -232,7 +232,7 @@ namespace Aplikacja_dla_GIT.Services
             Console.WriteLine("8.wyjscie");
             Console.WriteLine("wybor: ");
         }
-        bool CheckIsNull(List<Student> students)
+        public bool CheckIsNull(List<Student> students)
         {
             if (students.Count == 0)
             {

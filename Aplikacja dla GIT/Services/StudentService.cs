@@ -20,7 +20,7 @@ namespace Aplikacja_dla_GIT.Services
                 case "1":
                     {
                         var grade1 = double.Parse(grades);
-                        student.grades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "2":
@@ -136,9 +136,9 @@ namespace Aplikacja_dla_GIT.Services
         {
             var result = new StatisticSerice();
             result.HighestGrade = 0;
-            result.LowestGrade = allArades[0];
+            result.LowestGrade = AllArades[0];
             result.AverageGrade = 0;
-            foreach (var item in allArades)
+            foreach (var item in AllArades)
             {
                 Console.WriteLine(item);
                 result.AverageGrade += item;
