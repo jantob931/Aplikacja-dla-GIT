@@ -4,7 +4,6 @@ namespace Aplikacja_dla_GIT.Services
 {
     public class StudentService : IStudentService
     {
-        private List<double> AllArades = new List<double>();
         public Student CreateStudent(string name, string surname)
         {
             var student = new Student();
@@ -26,79 +25,79 @@ namespace Aplikacja_dla_GIT.Services
                 case "2":
                     {
                         var grade1 = double.Parse(grades);
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "+2":
                     {
                         var grade1 = 2.5;
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "-2":
                     {
                         var grade1 = 1.75;
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "3":
                     {
                         var grade1 = double.Parse(grades);
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "+3":
                     {
                         var grade1 = 3.5;
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "-3":
                     {
                         var grade1 = 2.75;
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "4":
                     {
                         var grade1 = double.Parse(grades);
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "+4":
                     {
                         var grade1 = 4.5;
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "-4":
                     {
                         var grade1 = 3.75;
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "5":
                     {
                         var grade1 = double.Parse(grades);
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "+5":
                     {
                         var grade1 = 5.5;
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "-5":
                     {
                         var grade1 = 4.75;
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "6":
                     {
                         var grade1 = double.Parse(grades);
-                        AllArades.Add(grade1);
+                        student.Grades.Add(grade1);
                         break;
                     }
                 case "q":
@@ -132,13 +131,14 @@ namespace Aplikacja_dla_GIT.Services
             }
             return studentValidate;
         }
-        public StatisticSerice ShowStatistic()
+        public StatisticSerice ShowStatistic(Student student)
         {
             var result = new StatisticSerice();
             result.HighestGrade = 0;
-            result.LowestGrade = AllArades[0];
+            result.LowestGrade = student.Grades[0];
             result.AverageGrade = 0;
-            foreach (var item in AllArades)
+            Console.WriteLine("Oceny: ");
+            foreach (var item in student.Grades)
             {
                 Console.WriteLine(item);
                 result.AverageGrade += item;
@@ -151,17 +151,27 @@ namespace Aplikacja_dla_GIT.Services
                     result.LowestGrade = item;
                 }
             }
+            result.AverageGrade= result.AverageGrade/ student.Grades.Count();
             Console.WriteLine($"Najwyzsza ocena to {result.HighestGrade}");
             Console.WriteLine($"Najnizsz ocena to {result.LowestGrade}");
             Console.WriteLine($"Srednia ocen to {result.AverageGrade}");
+            if (result.AverageGrade < 3)
+            {
+                if (Average3Message != null)
+                {
+                    Average3Message(this, new EventArgs());
+                }
+
+            }
             return result;
         }
-        //public delegate void WriteMessage(object sender, EventArgs args);
-        //public event WriteMessage Average3;
-        //StudentService.WriteMessage += AverageUnder3;
-        // void AverageUnder3(object sednder,EventArgs args)
-        //{
-        //    Console.WriteLine("Oh no! We should inform student’s parents about this fact");
-        //}
+            
+        public delegate void WriteMessageDelegate(object sender, EventArgs args);
+        public event WriteMessageDelegate Average3Message;
+
+        public void AverageUnder3(object sednder, EventArgs args)
+        {
+            Console.WriteLine("Oh no! We should inform student’s parents about this fact");
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace Aplikacja_dla_GIT
             var studentServixce = new StudentService();
             var programSerive = new ProgramSerice();
             Student student = new Student();
-
+            studentServixce.Average3Message += studentServixce.AverageUnder3;
             Console.Clear();                 
             while (true)
             {

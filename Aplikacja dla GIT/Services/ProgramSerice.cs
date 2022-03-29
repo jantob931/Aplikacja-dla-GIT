@@ -182,7 +182,7 @@ namespace Aplikacja_dla_GIT.Services
                         if (item.Grades.Count != 0)
                         {
                             Console.Clear();
-                            studentService.ShowStatistic();
+                            studentService.ShowStatistic(item);
                             Console.ReadKey();
                             break;
                         }
@@ -269,5 +269,8 @@ namespace Aplikacja_dla_GIT.Services
             }
             return false;
         }
+        
+        
+       
     }
 }

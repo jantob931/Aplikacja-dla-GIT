@@ -5,6 +5,6 @@ namespace Aplikacja_dla_GIT.Services
     public interface IStudentService
     {
         void AddGrades(Student student, string grades);
-        StatisticSerice ShowStatistic();
+        StatisticSerice ShowStatistic(Student student);
     }
 }
