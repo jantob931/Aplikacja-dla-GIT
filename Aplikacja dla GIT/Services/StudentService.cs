@@ -159,7 +159,6 @@ namespace Aplikacja_dla_GIT.Services
                 {
                     Average3Message(this, new EventArgs());
                 }
-
             }
             return result;
         }  
@@ -167,7 +166,18 @@ namespace Aplikacja_dla_GIT.Services
         public event WriteMessageDelegate Average3Message;
         public void AverageUnder3(object sednder, EventArgs args)
         {
-            Console.WriteLine("Oh no! We should inform student’s parents about this fact");
+            Console.WriteLine("Oh no! average is under 3.0, We should inform student’s parents about this fact");
+        }
+        public void StudentExist(List<Student> students, Student item, string name, string surname)
+        {
+            if (item == students.Last())
+            {
+                if (item.Name != name || item.Surname != surname)
+                {
+                    Console.WriteLine("nie ma takiego studenta");
+                    Console.ReadKey();
+                }
+            }
         }
     }
 }

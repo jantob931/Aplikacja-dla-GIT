@@ -28,42 +28,50 @@ namespace Aplikacja_dla_GIT
                             {
                                 case 1:
                                     {
-                                        programSerive.AddStudents(student, studentServixce, students);
+                                    Console.Clear();
+                                    programSerive.AddStudents(student, studentServixce, students);
                                         break;
                                     }
                                 case 2:
                                     {
-                                        programSerive.AddGrades(students, studentServixce);
+                                    Console.Clear();
+                                    programSerive.AddGrades(students, studentServixce);
                                         break;
                                     }
                                 case 3:
                                     {
-                                        programSerive.EditName(students, studentServixce);                     
+                                    Console.Clear();
+                                    programSerive.EditName(students, studentServixce);                     
                                         break;
                                     }
                                 case 4:
                                     {
-                                        programSerive.EditSurname(students, studentServixce);                                      
+                                    Console.Clear();
+                                    programSerive.EditSurname(students, studentServixce);                                      
                                         break;
                                     }
                                 case 5:
                                     {
-                                        programSerive.ShowAllStudents(students);                                      
+                                    Console.Clear();
+                                    programSerive.ShowAllStudents(students);                                      
                                         break;
                                     }
                                 case 6:
                                     {
-                                        programSerive.ShowStudnetsStatistic(students, studentServixce);
+                                    Console.Clear();
+                                    programSerive.ShowStudnetsStatistic(students, studentServixce);
                                         break;
                                     }
                                 case 7:
                                     {
-                                        programSerive.RemoveStudent(students);
+                                    Console.Clear();
+                                    programSerive.RemoveStudent(students);
                                         break;
                                     }
                                 case 8:
                                     {
-                                        Environment.Exit(0);
+                                    Console.Clear();
+                                    Environment.Exit(0);
                                         break;
                                     }
                             }

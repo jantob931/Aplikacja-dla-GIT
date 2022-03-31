@@ -12,11 +12,10 @@ namespace Aplikacja_dla_GIT.Services
                 Console.Clear();
                 Console.WriteLine("Po skoczeniu dodawnia studentow wpisz exit, wprowadz imie i nazwisko ucznia rodzielajac je przycieksiem enetr: ");
                 string name = Console.ReadLine();
-
                 if (name.ToLower() == "exit")
                 {
                     Console.WriteLine("Zakonczono dodawanie studentow, za 5 sec nastapi powrot do menu ");
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
                     break;
                 }
                 else
@@ -62,7 +61,8 @@ namespace Aplikacja_dla_GIT.Services
                             var mark = Console.ReadLine();
                             if (mark == "q")
                             {
-                                Console.WriteLine("zakonczono dodwanie ocen");
+                                Console.Clear();
+                                Console.WriteLine("zakonczono dodwanie ocen, wcisnij dowolny przycisk aby wrocic do menu");
                                 Console.ReadKey();
                                 break;
                             }
@@ -72,10 +72,7 @@ namespace Aplikacja_dla_GIT.Services
                             }
                         }
                     }
-                    else if (item == students.Count - 1)
-                    {
-                        Console.WriteLine("Nie znaleziono takiego studenta!");
-                    }
+                    StudentExist(students, students[item], name, surname);
                 }
             }
         }
@@ -95,18 +92,21 @@ namespace Aplikacja_dla_GIT.Services
                 {
                     if (item.Name == name && item.Surname == surname)
                     {
+                        Console.Clear();
                         Console.WriteLine("Podaj nowe imie: ");
                         string name2 = Console.ReadLine();
                         int licznik = 0;
                         if (IsDigiOrEmpty(licznik, name2) == false)
                         {
                             item.Name = name2;
+                            Console.Clear();
                             Console.WriteLine($"Imie zosatlo zmienione na: {name2}");
                             Console.ReadKey();
                             break;
                         }
                         break;
                     }
+                    StudentExist(students, item, name, surname);
                 }
             }
         }
@@ -131,6 +131,7 @@ namespace Aplikacja_dla_GIT.Services
                         int licznik = 0;
                         if (IsDigiOrEmpty(licznik, surname2) == false)
                         {
+                            Console.Clear();
                             item.Surname = surname2;
                             Console.WriteLine($"Nazwisko zosatlo zmienione na: {surname2}");
                             Console.ReadKey();
@@ -138,6 +139,7 @@ namespace Aplikacja_dla_GIT.Services
                         }
                         break;
                     }
+                    StudentExist(students, item, name, surname);
                 }
             }
         }
@@ -186,13 +188,15 @@ namespace Aplikacja_dla_GIT.Services
                             Console.ReadKey();
                             break;
                         }
-                        if (item.Grades.Count == 0)
+                        else if (item.Grades.Count == 0)
                         {
                             Console.WriteLine("Uczen nie posiada ocen!");
                             Console.ReadKey();
+                            break;
                         }
-                        break;
+                        
                     }
+                    StudentExist(students, item, name, surname);
                 }
                 break;
             }
@@ -217,6 +221,7 @@ namespace Aplikacja_dla_GIT.Services
                     Console.ReadKey();
                     break;
                 }
+                StudentExist(students, item, name, surname);
             }
         }
         public void Studnts_menu()
@@ -244,7 +249,6 @@ namespace Aplikacja_dla_GIT.Services
                 return false;
             }
         }
-
         public bool IsDigiOrEmpty(int licznik, string argument)
         {
             Console.Clear();
@@ -269,5 +273,16 @@ namespace Aplikacja_dla_GIT.Services
             }
             return false;
         }     
+        public void StudentExist(List<Student> students, Student item, string name, string surname)
+        {      
+             if ( item == students.Last() )
+             {
+                 if (item.Name != name || item.Surname != surname)
+                 {                        
+                 Console.WriteLine("nie ma takiego studenta!!!, wcisnij dowolny klaiwsz aby wrocic do menu.");
+                 Console.ReadKey();                                       
+                 }                                          
+             }                        
+        }
     }
 }
