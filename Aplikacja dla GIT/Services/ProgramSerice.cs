@@ -15,7 +15,7 @@ namespace Aplikacja_dla_GIT.Services
                 if (name.ToLower() == "exit")
                 {
                     Console.WriteLine("Zakonczono dodawanie studentow, za 5 sec nastapi powrot do menu ");
-                    Thread.Sleep(100);
+                    Thread.Sleep(5000);
                     break;
                 }
                 else
