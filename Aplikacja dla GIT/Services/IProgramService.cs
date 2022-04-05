@@ -13,5 +13,6 @@ namespace Aplikacja_dla_GIT.Services
         void Studnts_menu();
         bool CheckIsNull(List<Student> students);
         bool IsDigiOrEmpty(int licznik, string argument);
+        Student FindStudent(List<Student> students);    
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Aplikacja_dla_GIT.Services
 {
-    public class ProgramSerice : IProgramService
+    public class ProgramService : IProgramService
     {
         public void AddStudents(Student student, StudentService studentService, List<Student> students)
         {
-            int licznik = 0;
+            int counter = 0;
             while (true)
             {
                 Console.Clear();
@@ -21,14 +21,13 @@ namespace Aplikacja_dla_GIT.Services
                 else
                 {
                     string surname = Console.ReadLine();
-                    if (IsDigiOrEmpty(licznik, name) || IsDigiOrEmpty(licznik, surname) == true)
+                    if (IsDigiOrEmpty(counter, name) || IsDigiOrEmpty(counter, surname) == true)
                     {
                         break;
                     }
                     else
                     {
                         bool studentVaildate = studentService.ValidateStudent(students, name, surname);
-
                         if (studentVaildate)
                         {
                             student = studentService.CreateStudent(name, surname);
@@ -47,32 +46,26 @@ namespace Aplikacja_dla_GIT.Services
             }
             if (students.Count != 0)
             {
-                Console.WriteLine("Podaj imie i nazwisko ucznia: ");
-                var name = Console.ReadLine();
-                var surname = Console.ReadLine();
-                for (var item = 0; item < students.Count; item++)
+                var NewStudent = FindStudent(students);
+                if (NewStudent != null)
                 {
-                    if (students[item].Name == name && students[item].Surname == surname)
+                    Console.Clear();
+                    Console.WriteLine("Po skoczeniu dodawnia ocen wcisnij q, podaj oceny: ");
+                    while (true)
                     {
-                        Console.Clear();
-                        Console.WriteLine("Po skoczeniu dodawnia ocen wcisnij q, podaj oceny: ");
-                        while (true)
+                        var mark = Console.ReadLine();
+                        if (mark == "q")
                         {
-                            var mark = Console.ReadLine();
-                            if (mark == "q")
-                            {
-                                Console.Clear();
-                                Console.WriteLine("zakonczono dodwanie ocen, wcisnij dowolny przycisk aby wrocic do menu");
-                                Console.ReadKey();
-                                break;
-                            }
-                            else
-                            {
-                                studentService.AddGrades(students[item], mark);
-                            }
+                            Console.Clear();
+                            Console.WriteLine("zakonczono dodwanie ocen, wcisnij dowolny przycisk aby wrocic do menu");
+                            Console.ReadKey();
+                            break;
+                        }
+                        else
+                        {
+                            studentService.AddGrades(NewStudent, mark);
                         }
                     }
-                    StudentExist(students, students[item], name, surname);
                 }
             }
         }
@@ -85,29 +78,21 @@ namespace Aplikacja_dla_GIT.Services
             }
             if (students.Count != 0)
             {
-                Console.WriteLine("Podaj imie i nazwisko studenta:");
-                string name = Console.ReadLine();
-                string surname = Console.ReadLine();
-                foreach (var item in students)
+                var NewStudent = FindStudent(students);
+                if (NewStudent != null)
                 {
-                    if (item.Name == name && item.Surname == surname)
+                    Console.Clear();
+                    Console.WriteLine("Podaj nowe imie: ");
+                    string name2 = Console.ReadLine();
+                    int counter = 0;
+                    if (IsDigiOrEmpty(counter, name2) == false)
                     {
+                        NewStudent.Name = name2;
                         Console.Clear();
-                        Console.WriteLine("Podaj nowe imie: ");
-                        string name2 = Console.ReadLine();
-                        int licznik = 0;
-                        if (IsDigiOrEmpty(licznik, name2) == false)
-                        {
-                            item.Name = name2;
-                            Console.Clear();
-                            Console.WriteLine($"Imie zosatlo zmienione na: {name2}");
-                            Console.ReadKey();
-                            break;
-                        }
-                        break;
+                        Console.WriteLine($"Imie zosatlo zmienione na: {name2}");
+                        Console.ReadKey();                     
                     }
-                    StudentExist(students, item, name, surname);
-                }
+                }           
             }
         }
         public void EditSurname(List<Student> students, StudentService studentService)
@@ -119,27 +104,19 @@ namespace Aplikacja_dla_GIT.Services
             }
             if (students.Count != 0)
             {
-                Console.WriteLine("Podaj imie i nazwisko studenta:");
-                string name = Console.ReadLine();
-                string surname = Console.ReadLine();
-                foreach (var item in students)
+                var NewStudent = FindStudent(students);
+                if (NewStudent != null)
                 {
-                    if (item.Name == name && item.Surname == surname)
+                    Console.WriteLine("Podaj nowe nazwisko: ");
+                    string surname2 = Console.ReadLine();
+                    int counter = 0;
+                    if (IsDigiOrEmpty(counter, surname2) == false)
                     {
-                        Console.WriteLine("Podaj nowe nazwisko: ");
-                        string surname2 = Console.ReadLine();
-                        int licznik = 0;
-                        if (IsDigiOrEmpty(licznik, surname2) == false)
-                        {
-                            Console.Clear();
-                            item.Surname = surname2;
-                            Console.WriteLine($"Nazwisko zosatlo zmienione na: {surname2}");
-                            Console.ReadKey();
-                            break;
-                        }
-                        break;
+                        Console.Clear();
+                        NewStudent.Surname = surname2;
+                        Console.WriteLine($"Nazwisko zosatlo zmienione na: {surname2}");
+                        Console.ReadKey();
                     }
-                    StudentExist(students, item, name, surname);
                 }
             }
         }
@@ -174,31 +151,27 @@ namespace Aplikacja_dla_GIT.Services
                     Console.ReadKey();
                     break;
                 }
-                Console.WriteLine("Podaj imie i nazwisko studenta:");
-                string name = Console.ReadLine();
-                string surname = Console.ReadLine();
-                foreach (var item in students)
+                else
                 {
-                    if (item.Name == name && item.Surname == surname)
+                    var NewStudent = FindStudent(students);
+                    if (NewStudent != null)
                     {
-                        if (item.Grades.Count != 0)
+                        if (NewStudent.Grades.Count != 0 )
                         {
                             Console.Clear();
-                            studentService.ShowStatistic(item);
+                            studentService.ShowStatistic(NewStudent);
                             Console.ReadKey();
                             break;
                         }
-                        else if (item.Grades.Count == 0)
+                        else
                         {
                             Console.WriteLine("Uczen nie posiada ocen!");
                             Console.ReadKey();
                             break;
                         }
-                        
-                    }
-                    StudentExist(students, item, name, surname);
+                    }        
+                    break;
                 }
-                break;
             }
         }
         public void RemoveStudent(List<Student> students)
@@ -208,20 +181,14 @@ namespace Aplikacja_dla_GIT.Services
                 Console.WriteLine("Wcisnij dowolny przycisk aby wrocic do menu ");
                 Console.ReadKey();
             }
-            Console.WriteLine("Podaj imie i nazwisko studenta:");
-            string name = Console.ReadLine();
-            string surname = Console.ReadLine();
-            foreach (var item in students)
+            else
             {
-                if (item.Name == name && item.Surname == surname)
+                Console.Clear();
+                if (students.Remove(FindStudent(students)))
                 {
-                    Console.Clear();
-                    students.Remove(item);
                     Console.WriteLine("Uczen zostal usuniety, wcisnij dowolny klaiwsz aby wrocic do menu. ");
                     Console.ReadKey();
-                    break;
                 }
-                StudentExist(students, item, name, surname);
             }
         }
         public void Studnts_menu()
@@ -249,7 +216,7 @@ namespace Aplikacja_dla_GIT.Services
                 return false;
             }
         }
-        public bool IsDigiOrEmpty(int licznik, string argument)
+        public bool IsDigiOrEmpty(int counter, string argument)
         {
             Console.Clear();
             if (string.IsNullOrEmpty(argument))
@@ -262,8 +229,8 @@ namespace Aplikacja_dla_GIT.Services
             {
                 if (char.IsDigit(ite))
                 {
-                    licznik++;
-                    if (licznik == 1)
+                    counter++;
+                    if (counter == 1)
                     {
                         Console.WriteLine($"Blad, wprowadzono cyfry.");
                         Console.ReadKey();
@@ -273,16 +240,27 @@ namespace Aplikacja_dla_GIT.Services
             }
             return false;
         }     
-        public void StudentExist(List<Student> students, Student item, string name, string surname)
-        {      
-             if ( item == students.Last() )
-             {
-                 if (item.Name != name || item.Surname != surname)
-                 {                        
-                 Console.WriteLine("nie ma takiego studenta!!!, wcisnij dowolny klaiwsz aby wrocic do menu.");
-                 Console.ReadKey();                                       
-                 }                                          
-             }                        
+        public Student FindStudent(List<Student> students)
+        {
+            Console.WriteLine("Podaj imie i nazwisko studenta:");
+            string name = Console.ReadLine();
+            string surname = Console.ReadLine();
+            foreach (var item in students)
+            {
+                if (item.Name == name && item.Surname == surname)
+                {
+                    return item;
+                }
+                if (item == students.Last())
+                {
+                    if (item.Name != name || item.Surname != surname)
+                    {
+                        Console.WriteLine("nie ma takiego studenta!!!, wcisnij dowolny klaiwsz aby wrocic do menu.");
+                        Console.ReadKey();
+                    }
+                }               
+            }
+            return null;         
         }
     }
 }

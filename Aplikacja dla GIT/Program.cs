@@ -8,20 +8,19 @@ namespace Aplikacja_dla_GIT
         static void Main(string[] args)
         {
             var students = new List<Student>();
-            var studentServixce = new StudentService();
-            var programSerive = new ProgramSerice();
+            var studentService = new StudentService();
+            var programService = new ProgramService();
             Student student = new Student();
-            studentServixce.Average3Message += studentServixce.AverageUnder3;
+            studentService.Average3Message += studentService.AverageUnder3;
             Console.Clear();                 
             while (true)
             {
                     Console.Clear();
-                    programSerive.Studnts_menu();
+                    programService.Studnts_menu();
                     var deciosion = Console.ReadLine();
                     try
                     {
                         int choice = int.Parse(deciosion);
-
                         if (choice > 0 && choice <= 8)
                         {
                             switch (choice)
@@ -29,43 +28,43 @@ namespace Aplikacja_dla_GIT
                                 case 1:
                                     {
                                     Console.Clear();
-                                    programSerive.AddStudents(student, studentServixce, students);
+                                    programService.AddStudents(student, studentService, students);
                                         break;
                                     }
                                 case 2:
                                     {
                                     Console.Clear();
-                                    programSerive.AddGrades(students, studentServixce);
+                                    programService.AddGrades(students, studentService);
                                         break;
                                     }
                                 case 3:
                                     {
                                     Console.Clear();
-                                    programSerive.EditName(students, studentServixce);                     
+                                    programService.EditName(students, studentService);                     
                                         break;
                                     }
                                 case 4:
                                     {
                                     Console.Clear();
-                                    programSerive.EditSurname(students, studentServixce);                                      
+                                    programService.EditSurname(students, studentService);                                      
                                         break;
                                     }
                                 case 5:
                                     {
                                     Console.Clear();
-                                    programSerive.ShowAllStudents(students);                                      
+                                    programService.ShowAllStudents(students);                                      
                                         break;
                                     }
                                 case 6:
                                     {
                                     Console.Clear();
-                                    programSerive.ShowStudnetsStatistic(students, studentServixce);
+                                    programService.ShowStudnetsStatistic(students, studentService);
                                         break;
                                     }
                                 case 7:
                                     {
                                     Console.Clear();
-                                    programSerive.RemoveStudent(students);
+                                    programService.RemoveStudent(students);
                                         break;
                                     }
                                 case 8:
