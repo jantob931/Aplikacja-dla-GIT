@@ -1,2 +1,2 @@
 # Podstawy
-Aplikacja konwolowa - Dzienniczek ocen 
+Aplikacja konsolowa - Dzienniczek ocen 
